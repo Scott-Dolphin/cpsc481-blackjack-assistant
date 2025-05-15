@@ -27,7 +27,9 @@ def endGame(dHand, pHand):
     else:
         print("the dealer wins...")
     
-        
+    #Reset game after round ends
+    myHand.clear()
+    dHand.clear()
 
 print("Starting game...")
 
@@ -47,6 +49,11 @@ while True:
             myHand.append(game.dealOne())
             print(f'{myHand} currentValue: {countHand(myHand)}')
 
+            #Dealer draws 2 cards at start of game
+            dealerHand.append(game.dealOne())
+            dealerHand.append(game.dealOne())
+            print(f"Dealer shows: {dealerHand[0]}")
+
         case "show deck":
             game.printDeck()
 
@@ -54,12 +61,27 @@ while True:
             print(f'{myHand} current value: {countHand(myHand)}')
 
         case "hit":
+            #Check if game started
+            if not myHand:
+                print("Start a new game with 'shuffle' first.")
+                continue
+
             card = game.dealOne()
             myHand.append(card)
             print(f'you drew {card}. current value: {countHand(myHand)}')
 
-        case "hold":
-            print(f"\nyou hold at {countHand(myHand)}. The dealer's turn...")
+            #Bust Detection
+            if countHand(myHand) > 21:
+                print(f'you busted with {countHand(myHand)}. Dealer wins...')
+                myHand = []
+                dealerHand = []
+
+        case "stay":
+            if not myHand:
+                print("Start a new game with 'shuffle' first.")
+                continue
+
+            print(f"\nyou stay at {countHand(myHand)}. The dealer's turn...")
             endGame(dealerHand, myHand)
             
 
