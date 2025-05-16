@@ -3,7 +3,7 @@ from time import sleep
 
 game = deckOfCards()
 myHand = []
-
+dealerHand = []
 def endGame(dHand, pHand):
     sleep(1)
     dHand.append(game.dealOne())
