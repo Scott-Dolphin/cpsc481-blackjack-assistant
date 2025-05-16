@@ -20,7 +20,9 @@ def endGame(dHand, pHand):
     dealerValue = countHand(dHand)
     print(f'your hand: {playerValue}')
     print(f"dealer's hand: {dealerValue}")
-    if playerValue > dealerValue:
+    if dealerValue > 21:
+        print("Dealer busted! You win!")
+    elif playerValue > dealerValue:
         print('You Win!')
     elif playerValue == dealerValue:
         print("It's a tie...")
