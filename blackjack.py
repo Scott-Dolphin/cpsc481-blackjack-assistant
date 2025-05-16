@@ -83,6 +83,8 @@ print("Starting game...")
 
 # game CLI interface
 while True:
+    if myHand and dealerHand:
+        print("Recommendation:", recommendMove(myHand, dealerHand[0]))
     ans = input(">>> ").lower()
     match ans:
         case "exit":
@@ -113,8 +115,6 @@ while True:
                 print("Start a new game with 'shuffle' first.")
                 continue
 
-            print("Recommendation:", recommendMove(myHand, dealerHand[0]))
-
             card = game.dealOne()
             myHand.append(card)
             print(f'you drew {card}. current value: {countHand(myHand)}')
@@ -129,7 +129,6 @@ while True:
                 print("Start a new game with 'shuffle' first.")
                 continue
 
-            print("Recommendation:", recommendMove(myHand, dealerHand[0]))
             print(f"\nyou stay at {countHand(myHand)}. The dealer's turn...")
             endGame(dealerHand, myHand)
 
