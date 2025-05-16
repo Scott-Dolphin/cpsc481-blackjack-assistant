@@ -9,11 +9,15 @@ def endGame(dHand, pHand):
     dHand.append(game.dealOne())
     dHand.append(game.dealOne())
     print(f'{dHand} currentValue: {countHand(dHand)}')
+
+    playerValue = countHand(pHand)
+    dealerValue = countHand(dHand)
     
-    while countHand(dHand) <= 17:
+    while dealerValue < 17 or (dealerValue < playerValue and dealerValue <= 21):
         sleep(0.5)
         card = game.dealOne()
         dHand.append(card)
+        dealerValue = countHand(dHand)
         print(f'the dealer drew {card}. current value: {countHand(dHand)}')
     sleep(1)
     playerValue = countHand(pHand)
